@@ -1,7 +1,14 @@
 Revision history for CGI-Application-Plugin-FormState
 
-0.13    Oct 18, 2009
+0.13    ??? ??, 2009
+        - If the templating system in use is HTML::Template, and if the 
+          template has die_on_bad_params set, then FormState will now 
+          refrain from setting the cap_form_state storage variable into 
+          the template if the value does not exist in the template.
+          Thanks to AlexanderBecker (RT #50076)
+
         - Fixed typos in POD.  Thanks to Lyle Hopkins (COSMICNET) (RT #43470).
+
         - Changes of interest to module maintainers only:
           - source repo now on github: http://github.com/mgraham/CAP-FormState
           - fixed the makedocs script to work with more recent pod2html

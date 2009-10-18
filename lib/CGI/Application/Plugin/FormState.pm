@@ -555,7 +555,73 @@ sub _add_form_state_id_to_tmpl {
     my $storage_hash = $self->form_state->id;
     my $storage_name = $self->form_state->name;
 
-    $tmpl_params->{$storage_name} = $storage_hash;
+    # prevent setting the template variable if HTML::die_on_bad_params is on
+    if (_safe_to_set_storage_param(@_)) {
+        $tmpl_params->{$storage_name} = $storage_hash;
+    }
+    
+}
+sub _safe_to_set_storage_param {
+    my ($self, $ht_params, $tmpl_params, $tmpl_file) = @_;
+    
+    # always safe unless we're using an HTML::Template derivative
+    return 1 unless _template_class_isa_html_template($self);
+
+    my $die_on_bad_params = 1;
+    if (exists $ht_params->{'die_on_bad_params'}) {
+        if (!$ht_params->{'die_on_bad_params'}) {
+            $die_on_bad_params = 0;
+        }
+    }
+
+    # safe if die_on_bad_params is not set
+    return 1 unless $die_on_bad_params;
+
+    # die_on_bad_params is set.  
+    #
+    # We can only safely set the formstate storage param if it exists
+    # in the template.
+    
+    # In order to determine whether the template contains the formstate 
+    # storage name as a key, we have to create the template object, 
+    # parse it, and then throw it away -- only to have CGI::Application 
+    # itself create the same object again after this hook returns.
+    #
+    # Terribly inefficient, but there doesn't appear to be a way 
+    # around this.  
+
+    my $t;
+    if (ref $tmpl_file eq 'SCALAR') {
+        $t = HTML::Template->new( scalarref => $tmpl_file, %{$ht_params} );
+    } 
+    elsif (ref $tmpl_file eq 'GLOB') {
+        my $position = tell $tmpl_file;
+        $t = HTML::Template->new( filehandle => $tmpl_file, %{$ht_params} );
+        # reset position on the template filehandle back to where it started
+        # so that when CGI::Application creates the template again, the pointer
+        # will be in the same place
+        seek $tmpl_file, $position, 0;
+    } 
+    else {
+        $t = HTML::Template->new( filename => $tmpl_file, %{$ht_params});
+    }
+    
+    # safe if the param is present in the template
+    return 1 if $t->query(name => $self->form_state->name);
+    
+    # otherwise, unsafe
+    return;
+}
+
+
+sub _template_class_isa_html_template {
+    my $self = shift;
+    # first check to see if the template class is HTML::Template or one of its
+    # relatives, e.g. HTML::Template::Pluggable, HTML::Template::Expr
+    if (eval { $self->html_tmpl_class->isa('HTML::Template') }) {
+        return 1;
+    }
+    return;
 }
 
 =head1 MOTIVATION
