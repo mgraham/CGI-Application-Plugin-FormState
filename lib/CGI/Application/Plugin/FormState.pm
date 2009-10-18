@@ -38,11 +38,11 @@ CGI::Application::Plugin::FormState - Store Form State without Hidden Fields
 
 =head1 VERSION
 
-Version 0.13
+Version 0.12_1
 
 =cut
 
-our $VERSION = '0.13';
+our $VERSION = '0.12_1';
 
 =head1 SYNOPSIS
 

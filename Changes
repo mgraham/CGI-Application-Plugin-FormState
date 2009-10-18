@@ -1,7 +1,8 @@
 Revision history for CGI-Application-Plugin-FormState
 
-0.13    ??? ??, 2009
-        - If the templating system in use is HTML::Template, and if the 
+0.12_1  ??? ??, 2009
+        - EXPERIMENTAL FEATURE
+          If the templating system in use is HTML::Template, and if the 
           template has die_on_bad_params set, then FormState will now 
           refrain from setting the cap_form_state storage variable into 
           the template if the value does not exist in the template.
