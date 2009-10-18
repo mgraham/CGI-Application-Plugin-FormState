@@ -173,7 +173,7 @@ C<cap_form_state>; it is added automatically to your template
 parameters via the C<load_tmpl> hook.
 
 If you want to use a parameter other than C<cap_form_state> you can do
-so via the C<name> parameter to C<form_state->config>.
+so via the C<name> parameter to C<< form_state->config >>.
 
 If you're skeptical about whether all this abstraction is a good idea,
 see L<"MOTIVATION">, below.
@@ -289,7 +289,7 @@ the key in the user's session, for the name of hidden form field, and
 the template parameter used to fill the hidden form field.  So if you
 set the C<name> to C<foo>:
 
-    $self->form_state_config('name' => 'foo');
+    $self->form_state->config('name' => 'foo');
 
 then the hidden field in your template should look like this:
 
@@ -306,7 +306,7 @@ the user's session.  Uses the same format as L<CGI::Session>'s
 C<expire>.  Defaults to 2 days (C<'2d'>).  To cancel expiration and make
 the form state last as long as the user's session does, use:
 
-    $self->form_state_config('expires' => 0);
+    $self->form_state->config('expires' => 0);
 
 =back
 
@@ -595,6 +595,10 @@ Please report any bugs or feature requests to
 C<bug-cgi-application-plugin-formstate@rt.cpan.org>, or through the web interface at
 L<http://rt.cpan.org>.  I will be notified, and then you'll automatically
 be notified of progress on your bug as I make changes.
+
+=head1 SOURCE
+
+The source code repository for this module can be found at http://github.com/mgraham/CAP-FormState
 
 =head1 ACKNOWLEDGEMENTS
 

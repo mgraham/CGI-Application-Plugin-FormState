@@ -1,6 +1,7 @@
 Revision history for CGI-Application-Plugin-FormState
 
 0.13    Oct 18, 2009
+        - Fixed typos in POD.  Thanks to Lyle Hopkins (COSMICNET) (RT #43470).
         - Changes of interest to module maintainers only:
           - source repo now on github: http://github.com/mgraham/CAP-FormState
           - fixed the makedocs script to work with more recent pod2html
