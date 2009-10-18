@@ -1,5 +1,9 @@
 Revision history for CGI-Application-Plugin-FormState
 
+0.13    Oct 18, 2009
+        - Changes of interest to module maintainers only:
+          - fixed the makedocs script to work with more recent pod2html
+
 0.12    Nov 16, 2005
         - added Makefile.PL compatibility to the distribution
 
