@@ -1,5 +1,8 @@
 Revision history for CGI-Application-Plugin-FormState
 
+0.12_3  
+        - changed explicit use of HTML::Template to $tmpl_class
+        
 0.12_2  
         - Added failing test case for CAP::TT with new die_on_bad_params code.
 

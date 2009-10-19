@@ -589,21 +589,23 @@ sub _safe_to_set_storage_param {
     #
     # Terribly inefficient, but there doesn't appear to be a way 
     # around this.  
+    
+    my $tmpl_class = $self->html_tmpl_class;
 
     my $t;
     if (ref $tmpl_file eq 'SCALAR') {
-        $t = HTML::Template->new( scalarref => $tmpl_file, %{$ht_params} );
+        $t = $tmpl_class->new( scalarref => $tmpl_file, %{$ht_params} );
     } 
     elsif (ref $tmpl_file eq 'GLOB') {
         my $position = tell $tmpl_file;
-        $t = HTML::Template->new( filehandle => $tmpl_file, %{$ht_params} );
+        $t = $tmpl_class->new( filehandle => $tmpl_file, %{$ht_params} );
         # reset position on the template filehandle back to where it started
         # so that when CGI::Application creates the template again, the pointer
         # will be in the same place
         seek $tmpl_file, $position, 0;
     } 
     else {
-        $t = HTML::Template->new( filename => $tmpl_file, %{$ht_params});
+        $t = $tmpl_class->new( filename => $tmpl_file, %{$ht_params});
     }
 
     # safe if the param is present in the template
