@@ -1,6 +1,26 @@
 Revision history for CGI-Application-Plugin-FormState
 
-0.12_1  ??? ??, 2009
+0.12_2  
+        - Added failing test case for CAP::TT with new die_on_bad_params code.
+
+        - Changes of interest to module maintainers only:
+          - t/prereqs-scenarios is now included in the distribution.  
+            
+            This is how I simulate the absense of specific modules 
+            (e.g. CAP::TT) when running the test suite.  
+
+            To test the various prerequisite scenarios, use the included 
+            prove-prereqs.pl script:
+
+              ./misc/prove-prereqs.pl t/prereq_scenarios -Ilib t/
+
+            This runs the test suite several times.  Each time it simulates
+            a different set of unavailable modules.
+
+            Adapted from the Perl Hacks book.
+           
+
+0.12_1  
         - EXPERIMENTAL FEATURE
           If the templating system in use is HTML::Template, and if the 
           template has die_on_bad_params set, then FormState will now 

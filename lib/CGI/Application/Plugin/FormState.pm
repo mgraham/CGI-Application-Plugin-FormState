@@ -38,11 +38,11 @@ CGI::Application::Plugin::FormState - Store Form State without Hidden Fields
 
 =head1 VERSION
 
-Version 0.12_1
+Version 0.12_2
 
 =cut
 
-our $VERSION = '0.12_1';
+our $VERSION = '0.12_2';
 
 =head1 SYNOPSIS
 
@@ -605,7 +605,7 @@ sub _safe_to_set_storage_param {
     else {
         $t = HTML::Template->new( filename => $tmpl_file, %{$ht_params});
     }
-    
+
     # safe if the param is present in the template
     return 1 if $t->query(name => $self->form_state->name);
     
@@ -618,8 +618,13 @@ sub _template_class_isa_html_template {
     my $self = shift;
     # first check to see if the template class is HTML::Template or one of its
     # relatives, e.g. HTML::Template::Pluggable, HTML::Template::Expr
-    if (eval { $self->html_tmpl_class->isa('HTML::Template') }) {
-        return 1;
+    
+    my $html_tmpl_class = $self->html_tmpl_class;
+    if ($html_tmpl_class) {
+        eval "require $html_tmpl_class;";
+        if (eval { $html_tmpl_class->isa('HTML::Template') }) {
+            return 1;
+        }
     }
     return;
 }
