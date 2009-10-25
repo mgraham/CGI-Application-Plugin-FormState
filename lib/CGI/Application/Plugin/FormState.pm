@@ -312,8 +312,6 @@ the form state last as long as the user's session does, use:
 
 =cut
 
-my %Installed_Callback;
-
 sub config {
     my $self         = shift;
     my %args         = @_;
