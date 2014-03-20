@@ -3,7 +3,7 @@ NAME
     Fields
 
 VERSION
-    Version 0.13
+    Version 0.12_2
 
 SYNOPSIS
     FormState is just a temporary stash that you can use for storing and
@@ -304,7 +304,7 @@ MOTIVATION
     state should.
 
 AUTHOR
-    Michael Graham, "<mag-perl@occamstoothbrush.com>"
+    Michael Graham, "<mgraham@cpan.org>"
 
 BUGS
     Please report any bugs or feature requests to
@@ -314,7 +314,7 @@ BUGS
 
 SOURCE
     The source code repository for this module can be found at
-    http://github.com/mgraham/CAP-FormState
+    http://github.com/mgraham/CGI-Application-Plugin-FormState
 
 ACKNOWLEDGEMENTS
     Thanks to Richard Dice and Cees Hek for helping me sort out the issues

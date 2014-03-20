@@ -669,7 +669,7 @@ be notified of progress on your bug as I make changes.
 
 =head1 SOURCE
 
-The source code repository for this module can be found at http://github.com/mgraham/CAP-FormState
+The source code repository for this module can be found at http://github.com/mgraham/CGI-Application-Plugin-FormState
 
 =head1 ACKNOWLEDGEMENTS
 
